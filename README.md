@@ -1,6 +1,6 @@
 # liaoning-enlist
 
-> 辽宁省文化馆报名小程序
+> 报名小程序
 
 ## Build Setup
 

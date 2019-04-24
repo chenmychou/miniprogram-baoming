@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/success/main"  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "rgba(51,51,51,1)",
+    "navigationBarTitleText": "报名表",
+    "navigationBarTextStyle": "black"
+  }
+}

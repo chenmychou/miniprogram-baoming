@@ -31,6 +31,6 @@ npm build:my
 npm run build --report
 
 # 效果图
-![demo](readme/111.png)
 ```
+![demo](readme/111.png)
 

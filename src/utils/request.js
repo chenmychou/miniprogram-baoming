@@ -1,8 +1,8 @@
 var Fly = require('flyio/dist/npm/wx') // npm引入方式
 const request = new Fly()
 request.config.timeout = 10 * 1000
-// request.config.baseURL = 'http://120.77.85.181:8090/admin'
-request.config.baseURL = 'http://192.168.0.177:8080/admin'
+request.config.baseURL = 'http://120.77.85.181:8090/admin'
+// request.config.baseURL = 'http://192.168.0.177:8080/admin'
 request.interceptors.request.use((request) => {
   // 给所有请求添加自定义header
   request.headers = {

@@ -1,474 +1,442 @@
 <template>
   <div class="app_pages">
-    <div class="header_info">注册信息</div>
-    <form class="form-container">
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>姓名</span>
-        <input type="text" class="form-control filed_input" v-model="formData.userName" placeholder="请填写您的姓名" />
+    <!-- <div>
+      <div @click="goToH5">
+        点击跳转H5
       </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>身份证号</span>
-        <input type="idcard" maxlength=18 class="form-control filed_input" v-model="formData.idNumber" @blur="blurIdNumber" placeholder="请填写您的身份证号" placeholder-class="filed_input_placeholder" />
+    </div> -->
+    <div class="header_search">
+      <img class="header_picture" src="../../../static/images/background1.png" alt="">
+      <div class="app_search">
+        <input @click="searchCourse()" disabled class="search_input" placeholder-style="font-size:15px;color:#B3B3B3;" placeholder="请输入您想查询的信息" /><i class="icon_search iconfont icon-sousuo"></i>
       </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>年龄</span>
-        <input type="number" maxlength=3 class="form-control filed_input" v-model="formData.age" placeholder="请填写您的年龄" />
+    </div>
+    <div class="baoming_tips">
+      <img class="center_picture" src="../../../static/images/background2.png" alt="">
+      <img class="baoming_picture" src="../../../static/images/2.png" alt="">
+      <div class="baoming_message">
+        <div class="_message">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了更加深入地开展文化艺术教育，辽宁省文化馆阵地公益培训班面向社会招收2019年第二期学员。现将招生相关事宜安排如下:</div>
+        <div class="baoming_btn"><button class="_btn" @click="enlistClick(0)">立即报名</button></div>
+        <div class="baoming_course">5~7月份课程</div>
       </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>性别</span>
-        <div class="form-control filed_input picker_field">
-          <picker class="picker_container" @change="bindgenderPickerChange" :value="formData.genderData" :range="genderList" custom-item="请选择">
-            <view class="picker">
-              {{formData.genderData || '请选择'}}
-            </view>
-          </picker>
-          <span class="choose_icon">></span>
+    </div>
+    <div class="baoming_template">
+      <img class="center_picture" src="../../../static/images/background2.png" alt="">
+      <img class="title_picture" src="../../../static/images/4.png" alt="">
+      <img class="template_picture" src="../../../static/images/5.png" alt="">
+      <div class="template_message">
+        <div class="_message">
+          <span class="_color">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2019年5月6日9点</span>开始在微信公众平台网络报名，报名后即可查询是否报名成功，报名成功的学员于5月8日-9日持<span class="_color">本人身份证</span>到辽宁省文化馆培训部核实身份，填写报名表，<span class="_color">5月13日</span>开始按照具体课程上课时间上课。 
         </div>
       </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>出生日期</span>
-        <div class="form-control filed_input picker_field">
-            <picker
-            class="picker_container"
-            mode="date"
-            :value="formData.birthDate"
-            placeholder="请选择"
-            @change="bindDateChange">
-            <view class="picker">
-              {{formData.birthDate || '请选择'}}
-            </view>
-          </picker>
-          <span class="choose_icon">></span>
+    </div>
+    <div class="baoming_template">
+      <img class="center_picture" src="../../../static/images/background2.png" alt="">
+      <img class="course_picture" src="../../../static/images/6.png" alt="">
+      <img class="template_picture" src="../../../static/images/5.png" alt="">
+      <div class="template_message">
+        <div class="label_value">
+          <div class="_label"><span>咨询电话</span></div>
+          <div class="_value">024-23906673</div>
+        </div>
+        <div class="label_value">
+          <div class="_label"><span>联系人</span></div>
+          <div class="_value">王老师、李老师、高老师</div>
+        </div>
+        <div class="label_value">
+          <div class="_label"><span>咨询地址</span></div>
+          <div class="_value">沈阳市和平区保安寺街28号辽宁省文化馆（盛京医院南湖院区西门）</div>
         </div>
       </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>申报专业</span>
-        <div class="form-control filed_input picker_field">
-          <picker class="picker_container" @change="bindmajorPickerChange" :value="formData.majorData" :range="majorList">
-            <view class="picker">
-              {{formData.majorData || '请选择'}}
-            </view>
-          </picker>
-          <span class="choose_icon">></span>
+    </div>
+    <div class="baoming_card">
+      <img class="center_picture" src="../../../static/images/background2.png" alt="">
+      <img class="course_time_picture" src="../../../static/images/7.png" alt="">
+      <img class="card_outer_picture" src="../../../static/images/9.png" alt="">
+      <div class="card_table">
+        <div class="card_item_list" v-for="item in courseListData" :key="item.id" @click="enlistClick(item.id)">
+          <div class="card_left_pic">
+            <img src="../../../static/images/8.png" alt="">
+            <span>{{item.id}}</span>
+          </div>
+          <div class="card_center_title">
+            <div class="card_type">{{item.courseName}}</div>
+            <div class="limit_number">限招{{item.limitNumber}}人</div>
+          </div>
+          <div class="card_right_title">
+            <div>地点：{{item.address}}</div>
+            <div>时间：{{item.dateTime}}</div>
+            <div>年龄：<span class="_color_age">{{item.limitAge}}</span>周岁以下</div>
+          </div>
         </div>
       </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>手机号码</span>
-        <input type="number" maxlength=11 class="form-control filed_input" v-model="formData.phone" placeholder="请填写您的手机号码" />
-      </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>家庭住址</span>
-        <input type="text" maxlength=30 class="form-control filed_input" v-model="formData.address" placeholder="请填写您的家庭住址" />
-      </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>健康状况</span>
-        <div class="form-control filed_input picker_field">
-          <picker class="picker_container" @change="bindhealthyPickerChange" :value="formData.healthyData" :range="healthyList">
-            <view class="picker">
-              {{formData.healthyData || '请选择'}}
-            </view>
-          </picker>
-          <span class="choose_icon">></span>
-        </div>
-      </div>
-      <div class="filed_line">
-        <span class="lable_name"><span class="labale_icon">*</span>验证码</span>
-        <div class="form-control filed_input picker_field filed_id_card_key">
-          <input type="text" class="form-control filed_input" v-model="formData.idCardKey" placeholder="请输入验证码" />
-          <canvas class="canvas" @click="changeIdCardKey" canvas-id="canvas"></canvas>
-        </div>
-      </div>
-      <div class="healthy_promise">
-        <span class="healthy_checkbox">
-          <checkbox-group @change="checkboxChange" class="checkbox_group">
-            <checkbox class="check_box" :checked="formData.checkPromiseStatus" />
-          </checkbox-group>
-        </span>
-          我已同意并阅读<span class="healthy_promise_modal" @click="showHealthyDetail">《健康承诺》</span>
-      </div>
-    </form>
-    <div class="submit_container">
-      <div class="cancel_btn"><button @click="cancelForm">重置</button></div>
-      <div class="confirm_btn"><button @click="confirmForm">确定</button></div>
     </div>
   </div>
 </template>
-
 <script>
-import { validate, IdentityCodeValid } from '../../utils'
-import { drawPic } from '../../utils/mcaptcha'
-// let Mcaptcha = require('../../utils/mcaptcha')
 export default {
   data () {
     return {
-      cvs: {
-        width: 120,
-        height: 35
-      },
-      formData: {
-        userName: 'asasf',
-        age: '',
-        genderData: '',
-        idNumber: '341021198603250218',
-        birthDate: '',
-        majorData: '',
-        phone: '13677876862',
-        address: '上海市军工路516号',
-        healthyData: '健康',
-        idCardKey: '',
-        checkPromiseStatus: true
-      },
-      formDataMap: {
-        userName: '姓名',
-        age: '年龄',
-        genderData: '性别',
-        idNumber: '身份证',
-        birthDate: '出生日期',
-        majorData: '专业',
-        phone: '手机号',
-        address: '家庭地址',
-        healthyData: '健康状况',
-        checkPromiseStatus: '勾选同意协议',
-        idCardKey: '验证码'
-      },
-      // genderData: '',
-      genderList: ['男', '女'],
-      // birthDate: '',
-      // age: '',
-      // idNumber: '',
-      // phone: '',
-      // address: '',
-      // userName: '',
-      // majorData: '',
-      majorList: ['舞蹈', '瑜珈', '模特', '数码钢琴', '国画', '古筝', '太极', '手工制作', '京剧', '书法', '合唱'],
-      // healthyData: '',
-      healthyList: ['健康', '良好', '一般', '较差']
-      // checkPromiseStatus: true
+      courseListData: [
+        {
+          id: 1,
+          courseName: '舞蹈班',
+          limitNumber: 30,
+          address: '四楼舞蹈教室',
+          dateTime: '周一上午9:00－10:30',
+          limitAge: 65
+        },
+        {
+          id: 2,
+          courseName: '瑜珈班',
+          limitNumber: 25,
+          address: '四楼舞蹈教室',
+          dateTime: '周二上午9:00－10:30',
+          limitAge: 65
+        },
+        {
+          id: 3,
+          courseName: '模特班',
+          limitNumber: 30,
+          address: '二楼舞蹈教室',
+          dateTime: '周二上午9:00－10:30',
+          limitAge: 65
+        },
+        {
+          id: 4,
+          courseName: '数码钢琴',
+          limitNumber: 18,
+          address: '二楼钢琴教室',
+          dateTime: '周二上午9:00－10:30',
+          limitAge: 70
+        },
+        {
+          id: 5,
+          courseName: '国画班',
+          limitNumber: 30,
+          address: '二楼书画教室',
+          dateTime: '周三上午9:00－10:30',
+          limitAge: 70
+        },
+        {
+          id: 6,
+          courseName: '古筝班',
+          limitNumber: 18,
+          address: '二楼古筝教室',
+          dateTime: '周三上午9:00－10:30',
+          limitAge: 70
+        },
+        {
+          id: 7,
+          courseName: '太极班',
+          limitNumber: 30,
+          address: '四楼舞蹈教室',
+          dateTime: '周三上午9:00－10:30',
+          limitAge: 65
+        },
+        {
+          id: 8,
+          courseName: '手工制作',
+          limitNumber: 20,
+          address: '二楼一教室',
+          dateTime: '周三上午9:00－10:30',
+          limitAge: 70
+        },
+        {
+          id: 9,
+          courseName: '京剧班',
+          limitNumber: 30,
+          address: '四楼舞蹈教室',
+          dateTime: '周四上午9:00－10:30',
+          limitAge: 65
+        },
+        {
+          id: 10,
+          courseName: '书法班',
+          limitNumber: 30,
+          address: '二楼书画教室',
+          dateTime: '周四上午9:00－10:30',
+          limitAge: 70
+        },
+        {
+          id: 11,
+          courseName: '合唱班',
+          limitNumber: 50,
+          address: '三楼多功能厅',
+          dateTime: '周五上午9:00－10:30',
+          limitAge: 70
+        }
+      ]
     }
   },
-
   components: {
   },
   onLoad () {
-    // drawPic(this)
-    // this.mcaptcha = new Mcaptcha({
-    //   el: 'canvas',
-    //   width: this.data.cvs.width,
-    //   height: this.data.cvs.height,
-    //   code: 'afced'
-    // })
   },
   methods: {
-    // 刷新图形验证码
-    changeIdCardKey () {
-      let num = this.formData.idNumber
-      if (!IdentityCodeValid(num)) {
-        wx.showToast({
-          title: '请输入正确的身份证号码获取验证码',
-          icon: 'none',
-          duration: 2000
-        })
-        return false
-      }
-      this.getIdCardKeyValue()
-    },
-    blurIdNumber (e) {
-      this.formData.birthDate = ''
-      this.formData.age = ''
-      this.formData.genderData = ''
-      let num = e.target.value
-      if (!IdentityCodeValid(num)) {
-        wx.showToast({
-          title: '身份证号码有误！',
-          icon: 'none',
-          duration: 2000
-        })
-        return false
-      }
-      if (num.length === 18) {
-        let autoAgeString = num.substr(6, 4)
-        let autoGenderData = num.substr(17, 1)
-        this.formData.genderData = autoGenderData % 2 === 0 ? this.genderList[1] : this.genderList[0]
-        const nowYear = new Date().getFullYear()
-        this.formData.age = nowYear - autoAgeString
-        let autoBirthDateString = num.substr(6, 8)
-        let autoBirthDate = autoBirthDateString.split('')
-        autoBirthDate.splice(4, 0, '-')
-        autoBirthDate.splice(7, 0, '-')
-        this.formData.birthDate = autoBirthDate.join('')
-      }
-      if (num.length === 15) {
-        let autoAgeString = num.substr(6, 2)
-        let autoGenderData = num.substr(14, 1)
-        this.formData.genderData = autoGenderData % 2 === 0 ? this.genderList[1] : this.genderList[1]
-        const nowYear = new Date().getFullYear()
-        this.formData.age = nowYear - (19 + autoAgeString)
-        let autoBirthDateString = num.substr(6, 6)
-        let autoBirthDate = autoBirthDateString.split('')
-        autoBirthDate.splice(2, 0, '-')
-        autoBirthDate.splice(5, 0, '-')
-        autoBirthDate.unshift('19')
-        this.formData.birthDate = autoBirthDate.join('')
-      }
-      this.getIdCardKeyValue()
-    },
-    getIdCardKeyValue () {
-      // 获取验证码
-      let params = {
-        idCardNo: this.formData.idNumber
-      }
-      this.request.get('lnTrainApply/getIdCardKeyValue.do', params).then(res => {
-        drawPic(this, res.data)
-      }).catch(err => {
-        console.log(err)
+    goToH5 () {
+      wx.navigateTo({
+        url: '../testH5/main'
       })
     },
-    checkboxChange (e) {
-      this.formData.checkPromiseStatus = !this.formData.checkPromiseStatus
-    },
-    bindgenderPickerChange (e) {
-      this.formData.genderData = this.genderList[e.target.value]
-    },
-    bindDateChange (e) {
-      this.formData.birthDate = e.target.value
-    },
-    bindmajorPickerChange (e) {
-      this.formData.majorData = this.majorList[e.target.value]
-    },
-    bindhealthyPickerChange (e) {
-      this.formData.healthyData = this.healthyList[e.target.value]
-    },
-    showHealthyDetail () {
-      let that = this
-      wx.showModal({
-        title: '健康承诺',
-        cancelText: '不同意',
-        cancelColor: '#666666',
-        confirmColor: '#E22E2D',
-        confirmText: '同意',
-        content: '本人自愿参加辽宁省文化馆公益培训班学习，在此郑重承诺：本人的身体条件和健康条件符合所参加的培训班的学习要求，若在辽宁省文化馆公益培训班学习期间，发生身体意外或突发疾病，本人自负后果。《健康承诺》',
-        success (res) {
-          if (res.confirm) {
-            that.formData.checkPromiseStatus = true
-            that.formData.checkBoxStatus = 1
-          } else if (res.cancel) {
-            that.formData.checkPromiseStatus = false
-            that.formData.checkBoxStatus = ''
-          }
-        }
+    enlistClick (id) {
+      wx.navigateTo({
+        url: '../main/main?id=' + id
       })
     },
-    confirmForm () {
-      let {
-        userName,
-        idNumber,
-        age,
-        genderData,
-        birthDate,
-        majorData,
-        phone,
-        address,
-        healthyData,
-        checkPromiseStatus,
-        idCardKey
-      } = this.formData
-      let params = {
-        userName,
-        idNumber,
-        age,
-        genderData,
-        birthDate,
-        majorData,
-        phone,
-        address,
-        healthyData,
-        checkPromiseStatus,
-        idCardKey
-      }
-      let postData = {
-        name: userName,
-        sex: genderData === '女' ? 2 : 1,
-        idCard: idNumber,
-        birthday: birthDate,
-        applyProfession: majorData + '班',
-        telphone: phone,
-        address,
-        healthy: healthyData,
-        status: 1,
-        idCardKey
-      }
-      if (validate(JSON.stringify(params), JSON.stringify(this.formDataMap))) {
-        let that = this
-        wx.showModal({
-          title: '温馨提示',
-          cancelText: '我再看看',
-          cancelColor: '#E22E2D',
-          confirmColor: '#666666',
-          confirmText: '确定提交',
-          content: '报名信息一经提交不可修改，如需修改请联系管理员',
-          success (res) {
-            if (res.confirm) {
-              that.request.post('/lnTrainApply/addLnTrainApply.do', postData).then(res => {
-                wx.showToast({
-                  title: '报名成功!',
-                  icon: 'success',
-                  duration: 2000,
-                  success () {
-                    wx.navigateTo({
-                      url: '../success/main'
-                    })
-                  }
-                })
-              }).catch(err => {
-                console.log(err)
-              })
-            } else if (res.cancel) {
-              console.log('用户取消')
-            }
-          }
-        })
-      }
-    },
-    cancelForm () {
-      // 取消报名
-      let that = this
-      wx.showModal({
-        title: '温馨提示',
-        cancelText: '取消',
-        cancelColor: '#E22E2D',
-        confirmColor: '#666666',
-        confirmText: '确定',
-        content: '您确定要清除所有个人信息吗？',
-        success (res) {
-          if (res.confirm) {
-            Object.assign(that.$data, that.$options.data())
-          } else if (res.cancel) {
-          }
-        }
+    searchCourse () {
+      wx.navigateTo({
+        url: '../search/main'
       })
     }
   },
   created () {
-    // let app = getApp()
   }
 }
 </script>
-
 <style scoped>
-.app_pages{
-  width: 100%;
-  height: 100%;
-  background:rgba(255,255,255,1);
-}
-.header_info{
-  height: 90rpx;
-  border-top: 1rpx solid #EEEEEE;
-  line-height: 90rpx;
-  font-size:30rpx;
-  font-family:PingFangSC-Medium;
-  font-weight:bold;
-  color:rgba(51,51,51,1);
-}
-.header_info::before{
-  content: '|';
-  margin-right: 20rpx;
-  margin-left: 20rpx;
-  /* color:  */
-  color:rgba(226,46,45,1);
-  height: 90rpx;
-  width: 30rpx;
-}
-.form-container{
+  .card_table{
+    position: absolute;
+    top: 1.5%;
+    width: 90%;
+    margin: 0 5%;
+    background: #FFFFFF
+  }
+  .card_table .card_item_list{
+    padding: 30rpx 38rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 185rpx;
+    border-bottom: 1px solid #DDF2FF
 
-}
-.filed_line{
-  height: 90rpx;
-  line-height: 90rpx;
-  padding: 0 36rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1rpx solid #EEEEEE;
-}
-.lable_name{
-  width: 25%;
-  font-size:28rpx;
-  font-family:PingFangSC-Regular;
-  font-weight:400;
-  color:rgba(102,102,102,1);
-}
-.labale_icon{
-  color: #E22E2D
-}
-.picker_field{
-  display: flex;
-  justify-content: space-between
-}
-.picker_container{
-  width: 99%
-}
-.filed_input{
-  width: 75%;
-  font-size:28rpx;
-  font-family:PingFangSC-Regular;
-  font-weight:400;
-  color:rgba(102,102,102,1);
-}
-.filed_input_placeholder{
-  font-size:14px;
-  font-family:PingFangSC-Regular;
-  font-weight:400;
-  color:rgba(179,179,179,1);
-}
-.healthy_promise{
-  height: 90rpx;
-  line-height: 90rpx;
-  padding: 0 26rpx;
-  font-size:11px;
-}
-.check_box{
-  transform: scale(0.6,0.6); 
-}
-.checkbox_group{
-  display: inline-block
-}
-.healthy_promise_modal{
-  color: #E22E2D
-}
-.filed_id_card_key{
-  display: flex;
-  align-items: center;
-  line-height: 90rpx;
-}
-.canvas {
-  height: 50rpx;
-  width: 60%;
-  display: flex;
-  align-items:center 
-}
-.submit_container{
-  display: flex;
-  justify-content: center;
-  height: 50rpx;
-  margin: 40rpx 30rpx;
-}
-.cancel_btn{
-  width: 45%;
-  margin-right: 2%;
-}
-.cancel_btn>button{
-  color: #E22E2D;
-  font-weight:400;
-  background:rgba(255,255,255,1);
-  border:1px solid rgba(226,46,45,1);
-}
-.confirm_btn{
-  width: 45%;
-}
-.confirm_btn>button{
-  font-weight:400;
-  color:rgba(255,255,255,1);
-  border:1px solid rgba(226,46,45,1);
-  background:rgba(226,46,45,1);
-}
+  }
+  .card_table .card_item_list .card_left_pic{
+    position: relative;
+    width: 20%
+  }
+  .card_table .card_item_list .card_left_pic img{
+    width: 90rpx;
+    height: 90rpx;
+  }
+  .card_table .card_item_list .card_left_pic span{
+    position: absolute;
+    top: 25rpx;
+    left: 35rpx;
+    font-size:36rpx;
+    font-family:HYZhuZiSuDaHeiW;
+    font-weight:bolder;
+    color:rgba(255,168,16,1);
+    line-height:40rpx;
+  }
+  .card_table .card_center_title{
+    width: 30%
+  }
+  .card_table .card_type{
+    font-size:32rpx;
+    font-family:PingFangSC-Medium;
+    font-weight:bold;
+    color:rgba(51,51,51,1);
+    line-height:48rpx;
+  }
+  .card_table .limit_number{
+    font-size:24rpx;
+    font-family:PingFangSC-Medium;
+    font-weight:bold;
+    color:rgba(255,168,16,1);
+    line-height:36rpx;
+  }
+  .card_table .card_right_title{
+    width: 60%;
+    font-size:24rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(128,128,128,1);
+    line-height:40rpx;
+  }
+  .card_table ._color_age{
+    color:rgba(255,168,16,1);
+  }
+
+  .app_pages{
+    position: absolute;
+    width: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    /* background: #81BCFF */
+  }
+  .header_picture{
+    width: 100%;
+    height: 789rpx;
+  }
+  .header_search{
+    position: relative;
+  }
+  .app_search{
+    position: absolute;
+    bottom: 30rpx;
+    width:90%;
+    left: 5%;
+    height:81rpx;
+    margin-top: 670rpx;
+    display: flex;
+    justify-content: center;
+    background:rgba(255,255,255,1);
+    align-items:center;
+  }
+  .search_input{
+    width: 90%;
+    height: 81rpx;
+  }
+  .icon_search{
+    font-size:30rpx;
+    color:#FFC35B;
+  }
+  .baoming_tips{
+    position: relative;
+  }
+  .center_picture{
+    margin-top: -20rpx;
+    width: 100%;
+    height: 500rpx;
+  }
+  .baoming_picture{
+    position: absolute;
+    z-index: 999;
+    width: 90%;
+    height: 416rpx;
+    top: 0;
+    left: 5%;
+  }
+  .baoming_message{
+    position: absolute;
+    z-index: 999;
+    width: 80%;
+    height: 416rpx;
+    top: 10.6%;
+    left: 10%;
+  }
+  .baoming_message ._message{
+    font-size:26rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    line-height:50rpx;
+    color:rgba(51,51,51,1);
+  }
+  .baoming_message .baoming_btn{
+    margin-top: 5%;
+    width: 100%;
+    height: 82rpx;
+  }
+  .baoming_message .baoming_btn ._btn{
+    width: 60%;
+    background:rgba(253,188,74,1);
+    border:1px solid rgba(255,195,91,1);
+    font-size:36rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+  }
+  .baoming_message .baoming_course{
+    margin-top: 5%;
+    text-align: center;
+    height:25rpx;
+    font-size:26rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(153,153,153,1);
+  }
+  .baoming_template{
+    position: relative;
+    width: 100%;
+  }
+  .baoming_template .template_picture{
+    position: absolute;
+    width: 95%;
+    left: 5%;
+    top: 0
+  }
+  .baoming_template .title_picture{
+    top: 0;
+    left: 5%;
+    position: absolute;
+    width: 276rpx;
+    height: 80rpx;
+    z-index: 999;
+  }
+  .baoming_template .course_picture{
+    top: 0;
+    left: 5%;
+    position: absolute;
+    width: 178rpx;
+    height: 80rpx;
+    z-index: 999;
+  }
+  .baoming_card .course_time_picture{
+    top: 0;
+    left: 5%;
+    position: absolute;
+    width: 335rpx;
+    height: 80rpx;
+    z-index: 999;
+  }
+  .baoming_template .template_message{
+    position: absolute;
+    z-index: 999;
+    width: 80%;
+    top: 23%;
+    left: 10%;
+  }
+  .baoming_template .template_message ._message{
+    font-size:26rpx;
+    font-family:PingFangSC-Semibold;
+    font-weight:600;
+    color:#333333;
+    line-height:50rpx;
+  }
+   .baoming_template .template_message ._message ._color{
+     color: #FFA70F;
+   }
+  .template_message .label_value{
+    display: flex;
+    justify-content: space-between;
+    height: 80rpx;
+
+  }
+  .template_message .label_value ._label{
+    width: 30%;
+  }
+  .template_message .label_value ._label>span{
+    padding: 10rpx 20rpx;
+    background: #DDF2FF;
+    font-size:26rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    line-height:60rpx;
+  }
+  .template_message .label_value ._value{
+    width: 70%;
+    font-size:26rpx;
+    font-family:PingFangSC-Regular;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    line-height:60rpx;
+  }
+  .baoming_card{
+    position: relative;
+    height: 2800rpx;
+    background: #DDF2FF;
+  }
+  .card_outer_picture{
+    z-index: 999;
+    position: absolute;
+    width: 337rpx;
+    height: 147rpx;
+    top: 0;
+    right: 0;
+  }
+
+
+  
 </style>

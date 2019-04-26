@@ -1,11 +1,15 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/main/main",
+    "pages/search/main",
+    "pages/info/main",
+    "pages/testH5/main",
     "pages/success/main"  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "rgba(51,51,51,1)",
-    "navigationBarTitleText": "报名表",
+    "navigationBarTitleText": "辽宁省文化馆公益培训班报名系统",
     "navigationBarTextStyle": "black"
   }
 }

@@ -11,8 +11,12 @@
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wx341c7088bfea3c45",
+	"appid": "wxd91d582609c7e4ff",
+	"appid111": "wx341c7088bfea3c45",
 	"projectname": "liaoning-enlist",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"libVersion": "2.6.6",
 	"condition": {
 		"search": {
 			"current": -1,
